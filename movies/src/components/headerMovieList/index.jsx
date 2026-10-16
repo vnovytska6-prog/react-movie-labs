@@ -1,36 +1,21 @@
+
 import React from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
-const Header = (props ) => {
-  const title = props.title
+const Header = (props) => {
   return (
-    <Paper 
-      component="div" 
+    <Paper
       sx={{
         display: "flex",
-        justifyContent: "space-around",
-        flexWrap: "wrap",
-        marginBottom: 1.5,
+        justifyContent: "center",
+        padding: 1.5,
+        marginBottom: 2,
       }}
-      >
-      <IconButton
-        aria-label="go back"
-      >
-        <ArrowBackIcon color="primary" fontSize="large" />
-      </IconButton>
-
-      <Typography variant="h4" component="h3">
-        {title}
+    >
+      <Typography variant="h4" component="h2">
+        {props.title}
       </Typography>
-      <IconButton
-        aria-label="go forward"
-      >
-        <ArrowForwardIcon color="primary" fontSize="large" />
-      </IconButton>
     </Paper>
   );
 };

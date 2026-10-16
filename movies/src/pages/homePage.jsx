@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";  
-import MovieList from "../components/movieList";
+
+import MovieList from "../components/movieList/index.jsx";
 import Grid from "@mui/material/Grid";
-import Header from '../components/headerMovieList';
-import FilterCard from "../components/filterMoviesCard";
+import FilterCard from "../components/filterMoviesCard/index.jsx";
+import Header from "../components/headerMovieList/index.jsx";
+
 
 const HomePage = (props) => {
   const [movies, setMovies] = useState([]);
@@ -60,3 +62,5 @@ const [genreFilter, setGenreFilter] = useState("0");
   );
 };
 export default HomePage;
+
+
