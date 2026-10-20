@@ -9,6 +9,21 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router";
 import { getMovieReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
+import Typography from "@mui/material/Typography";
+
+const MovieReview =  ({ review }) => {
+  return (
+    <>
+      <Typography variant="h5" component="h3">
+        Review By: {review.author}
+      </Typography>
+
+      <Typography variant="h6" component="p">
+        {review.content} 
+      </Typography>
+    </>
+  );
+};
 
 export default function MovieReviews({ movie }) {
   const [reviews, setReviews] = useState([]);
