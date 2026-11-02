@@ -8,7 +8,7 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from "../movieReview"
+import MovieReviews from "../movieReviews";
 
 const root = {
     display: "flex",
