@@ -10,7 +10,8 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
-
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,9 +23,39 @@ const queryClient = new QueryClient({
   },
 });
 
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+
+    primary: {
+      main: "#C1121F",
+    },
+
+    secondary: {
+      main: "#E9C46A",
+    },
+
+    background: {
+      default: "#0B0B0F",
+      paper: "#15151D",
+    },
+
+    text: {
+      primary: "#F8F7F4",
+      secondary: "#A8A8B3",
+    },
+  },
+
+  shape: {
+    borderRadius: 12,
+  },
+});
 
 const App = () => {
   return (
+     <ThemeProvider theme={theme}>
+      <CssBaseline />
+
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />
@@ -43,6 +74,7 @@ const App = () => {
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 
