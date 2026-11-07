@@ -25,9 +25,9 @@ const SiteHeader = () => {
 
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Option 4", path: "/" },
+    { label: "Favorites", path: "/movies/favorites" },
+    { label: "My List", path: "/" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -41,14 +41,32 @@ const SiteHeader = () => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
-        <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1 }}>
-            TMDB Client
-          </Typography>
-
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            All you ever wanted to know about Movies!
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "rgba(9, 9, 13, 0.94)",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
+        }}
+      >
+        <Toolbar
+          sx={{
+            minHeight: 72,
+            px: { xs: 2, md: 4 },
+          }}
+        >
+          <Typography
+            variant="h4"
+            onClick={() => navigate("/")}
+            sx={{
+              flexGrow: 1,
+              fontWeight: 800,
+              letterSpacing: "0.08em",
+              color: "primary.main",
+              cursor: "pointer",
+            }}
+          >
+            CINEMOD
           </Typography>
 
           {isMobile ? (
@@ -67,7 +85,7 @@ const SiteHeader = () => {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: "top",
+                  vertical: "bottom",
                   horizontal: "right",
                 }}
                 keepMounted
@@ -95,6 +113,15 @@ const SiteHeader = () => {
                   key={opt.label}
                   color="inherit"
                   onClick={() => handleMenuSelect(opt.path)}
+                  sx={{
+                    mx: 0.5,
+                    fontWeight: 600,
+                    textTransform: "none",
+                    "&:hover": {
+                      color: "primary.main",
+                      backgroundColor: "rgba(193, 18, 31, 0.08)",
+                    },
+                  }}
                 >
                   {opt.label}
                 </Button>
