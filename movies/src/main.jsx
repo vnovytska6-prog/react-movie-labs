@@ -28,26 +28,26 @@ const theme = createTheme({
     mode: "dark",
 
     primary: {
-      main: "#C1121F",
+      main: "#9D4EDD",
     },
 
     secondary: {
-      main: "#E9C46A",
+      main: "#F4A261",
     },
 
     background: {
-      default: "#0B0B0F",
-      paper: "#15151D",
+      default: "#09090D",
+      paper: "#17171F",
     },
 
     text: {
-      primary: "#F8F7F4",
-      secondary: "#A8A8B3",
+      primary: "#F8F8FA",
+      secondary: "#9B9BA7",
     },
   },
 
   shape: {
-    borderRadius: 12,
+    borderRadius: 14,
   },
 });
 

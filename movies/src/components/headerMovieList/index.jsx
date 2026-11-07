@@ -12,29 +12,59 @@ const Header = (props) => {
   return (
     <Paper
       component="div"
+      elevation={0}
       sx={{
         display: "flex",
-        justifyContent: "space-around",
-        flexWrap: "wrap",
-        marginBottom: 1.5,
+        alignItems: "center",
+        justifyContent: "space-between",
+        px: { xs: 2, md: 4 },
+        py: 2,
+        mb: 2,
+        backgroundColor: "transparent",
+        maxWidth: "1600px",
+        marginLeft: "auto",
+        marginRight: "auto",
       }}
     >
       <IconButton
         aria-label="go back"
         onClick={() => navigate(-1)}
+        sx={{
+          backgroundColor: "background.paper",
+          borderRadius: 2,
+          "&:hover": {
+            backgroundColor: "primary.main",
+          },
+        }}
       >
-        <ArrowBackIcon color="primary" fontSize="large" />
+        <ArrowBackIcon fontSize="large" />
       </IconButton>
 
-      <Typography variant="h4" component="h3">
+      <Typography
+        variant="h3"
+        component="h2"
+        sx={{
+          fontWeight: 700,
+          fontSize: { xs: "1.8rem", md: "2.4rem" },
+          letterSpacing: "-0.02em",
+          textAlign: "center",
+        }}
+      >
         {title}
       </Typography>
 
       <IconButton
         aria-label="go forward"
         onClick={() => navigate(+1)}
+        sx={{
+          backgroundColor: "background.paper",
+          borderRadius: 2,
+          "&:hover": {
+            backgroundColor: "primary.main",
+          },
+        }}
       >
-        <ArrowForwardIcon color="primary" fontSize="large" />
+        <ArrowForwardIcon fontSize="large" />
       </IconButton>
     </Paper>
   );
