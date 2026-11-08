@@ -12,6 +12,8 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import MustWatchMoviesPage from "./pages/mustWatchMoviesPage";
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -62,6 +64,7 @@ const App = () => {
            <MoviesContextProvider>
             <Routes>
           <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+          <Route path="/movies/must-watch" element={<MustWatchMoviesPage />} />
           <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
           <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
           <Route path="/movies/:id" element={<MoviePage />} />
