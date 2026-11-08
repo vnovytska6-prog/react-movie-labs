@@ -11,10 +11,12 @@ import { useNavigate } from "react-router";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
-const SiteHeader = () => {
+const SiteHeader = ({mode, toggleColorMode}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -45,13 +47,21 @@ const SiteHeader = () => {
   return (
     <>
       <AppBar
-        position="fixed"
-        sx={{
-          backgroundColor: "rgba(9, 9, 13, 0.94)",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
-        }}
-      >
+      position="fixed"
+      sx={{
+      backgroundColor:
+      mode === "dark"
+        ? "rgba(9, 9, 13, 0.94)"
+        : "rgba(255, 255, 255, 0.94)",
+
+      color: mode === "dark" ? "#F8F8FA" : "#18181B",
+      backdropFilter: "blur(12px)",
+      boxShadow:
+      mode === "dark"
+        ? "0 4px 20px rgba(0, 0, 0, 0.35)"
+        : "0 4px 20px rgba(0, 0, 0, 0.12)",
+       }} >
+
         <Toolbar
           sx={{
             minHeight: 72,
@@ -122,7 +132,7 @@ const SiteHeader = () => {
                     textTransform: "none",
                     "&:hover": {
                       color: "primary.main",
-                      backgroundColor: "rgba(193, 18, 31, 0.08)",
+                      backgroundColor: "rgba(157, 78, 221, 0.10)",
                     },
                   }}
                 >
@@ -131,6 +141,18 @@ const SiteHeader = () => {
               ))}
             </>
           )}
+
+          <IconButton
+          onClick={toggleColorMode}
+          color="inherit"
+          aria-label="toggle theme"
+          sx={{ ml: 1, border: "1px solid",
+           borderColor: "rgba(157, 78, 221, 0.35)",
+            "&:hover": {
+           backgroundColor: "rgba(157, 78, 221, 0.12)",},
+          }} >
+          {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
         </Toolbar>
       </AppBar>
 

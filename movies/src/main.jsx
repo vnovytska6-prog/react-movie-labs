@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { useState } from "react";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
@@ -6,10 +7,10 @@ import FavoriteMoviesPage from "./pages/favoriteMoviesPage.jsx";
 import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from "./components/siteHeader";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage'
+import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MustWatchMoviesPage from "./pages/mustWatchMoviesPage";
@@ -28,61 +29,118 @@ const queryClient = new QueryClient({
   },
 });
 
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-
-    primary: {
-      main: "#9D4EDD",
-    },
-
-    secondary: {
-      main: "#F4A261",
-    },
-
-    background: {
-      default: "#09090D",
-      paper: "#17171F",
-    },
-
-    text: {
-      primary: "#F8F8FA",
-      secondary: "#9B9BA7",
-    },
-  },
-
-  shape: {
-    borderRadius: 14,
-  },
-});
-
 const App = () => {
+  const [mode, setMode] = useState("dark");
+
+  const toggleColorMode = () => {
+    setMode((previousMode) =>
+      previousMode === "dark" ? "light" : "dark"
+    );
+  };
+
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+
+      primary: {
+        main: "#9D4EDD",
+      },
+
+      secondary: {
+        main: "#F4A261",
+      },
+
+      background: {
+        default: mode === "dark" ? "#09090D" : "#F5F5F7",
+        paper: mode === "dark" ? "#17171F" : "#FFFFFF",
+      },
+
+      text: {
+        primary: mode === "dark" ? "#F8F8FA" : "#18181B",
+        secondary: mode === "dark" ? "#9B9BA7" : "#66666F",
+      },
+    },
+
+    shape: {
+      borderRadius: 14,
+    },
+  });
+
   return (
-     <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
 
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <SiteHeader />
-           <MoviesContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <SiteHeader
+            mode={mode}
+            toggleColorMode={toggleColorMode}
+          />
+
+          <MoviesContextProvider>
             <Routes>
-          <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-          <Route path="/movies/must-watch" element={<MustWatchMoviesPage />} />
-          <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-          <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-          <Route path="/movies/:id" element={<MoviePage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={ <Navigate to="/" /> } />
-          <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-          <Route path="/movies/popular" element={<PopularMoviesPage />} />
-          <Route path="/movies/top-rated" element={<TopRatedMoviesPage />}/>
-          <Route path="/movies/now-playing" element={<NowPlayingMoviesPage />}/>
-          <Route path="/people/:id" element={<PersonDetailsPage />} />
-           </Routes>
-        </MoviesContextProvider>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+              <Route path="/" element={<HomePage />} />
+
+              <Route
+                path="/movies/favorites"
+                element={<FavoriteMoviesPage />}
+              />
+
+              <Route
+                path="/movies/must-watch"
+                element={<MustWatchMoviesPage />}
+              />
+
+              <Route
+                path="/movies/upcoming"
+                element={<UpcomingMoviesPage />}
+              />
+
+              <Route
+                path="/movies/popular"
+                element={<PopularMoviesPage />}
+              />
+
+              <Route
+                path="/movies/top-rated"
+                element={<TopRatedMoviesPage />}
+              />
+
+              <Route
+                path="/movies/now-playing"
+                element={<NowPlayingMoviesPage />}
+              />
+
+              <Route
+                path="/movies/:id"
+                element={<MoviePage />}
+              />
+
+              <Route
+                path="/people/:id"
+                element={<PersonDetailsPage />}
+              />
+
+              <Route
+                path="/reviews/:id"
+                element={<MovieReviewPage />}
+              />
+
+              <Route
+                path="/reviews/form"
+                element={<AddMovieReviewPage />}
+              />
+
+              <Route
+                path="*"
+                element={<Navigate to="/" />}
+              />
+            </Routes>
+          </MoviesContextProvider>
+        </BrowserRouter>
+
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
