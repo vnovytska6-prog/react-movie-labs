@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieCredits } from "../../api/tmdb-api";
 import Spinner from "../spinner";
+import { Link } from "react-router";
 
 const MovieCast = ({ movie }) => {
   const { data, error, isPending, isError } = useQuery({
@@ -44,12 +45,19 @@ const MovieCast = ({ movie }) => {
       >
         {cast.map((actor) => (
           <Box
-            key={actor.id}
-            sx={{
-              minWidth: 110,
-              textAlign: "center",
-            }}
-          >
+           key={actor.id}
+           component={Link}
+           to={`/people/${actor.id}`}
+           sx={{
+           minWidth: 110,
+           textAlign: "center",
+           textDecoration: "none",
+           color: "inherit",
+           transition: "0.2s", "&:hover": {
+           transform: "translateY(-4px)",
+          },
+           }}
+>
             <Avatar
               src={
                 actor.profile_path
