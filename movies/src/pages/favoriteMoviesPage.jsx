@@ -6,12 +6,13 @@ import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
-
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const FavoriteMoviesPage = () => {
   const {favorites: movieIds } = useContext(MoviesContext);
 
-  // Create an array of queries and run in parallel.
+  // Array of queries and run in parallel
   const favoriteMovieQueries = useQueries({
     queries: movieIds.map((movieId) => {
       return {
@@ -32,6 +33,25 @@ const FavoriteMoviesPage = () => {
     q.data.genre_ids = q.data.genres.map(g => g.id)
     return q.data
   });
+
+  if (movies.length === 0) {
+  return (
+    <Box
+      sx={{
+        textAlign: "center",
+        py: 10,
+      }}
+    >
+      <Typography variant="h4" sx={{ fontWeight: 700, mb: 2 }}>
+        Your favourites list is empty
+      </Typography>
+
+      <Typography color="text.secondary">
+        Start exploring and save movies you love
+      </Typography>
+    </Box>
+  );
+}
 
   return (
     <PageTemplate
