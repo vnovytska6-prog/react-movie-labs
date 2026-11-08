@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const MoviesContext = React.createContext(null);
-
 const MoviesContextProvider = (props) => {
   const [favorites, setFavorites] = useState( [] )
   const [myReviews, setMyReviews] = useState( {} ) 
   const [mustWatch, setMustWatch] = useState([]);
 
-  const addToFavorites = (movie) => {
-    let newFavorites = [];
-    if (!favorites.includes(movie.id)){
-      newFavorites = [...favorites, movie.id];
-    }
-    else{
-      newFavorites = [...favorites];
-    }
-    setFavorites(newFavorites)
-  };
+ const addToFavorites = (movie) => {
+  if (!favorites.includes(movie.id)) {
+    setFavorites([...favorites, movie.id]);
+  }
+};
 
   const addToMustWatch = (movie) => {
   if (!mustWatch.includes(movie.id)) {

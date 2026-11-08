@@ -87,11 +87,10 @@ const navigate = useNavigate();
     setRating(event.target.value);
   };
 
-  const handleSnackClose = (event) => {
-    setOpen(false);
-    navigate("/movies/favorites");
-  };
-
+ const handleSnackClose = () => {
+  setOpen(false);
+  navigate("/movies/favorites");
+};
 
    const onSubmit = (review) => {
     review.movieId = movie.id;
@@ -108,7 +107,7 @@ const navigate = useNavigate();
         Write a review
       </Typography>
 
-            <Snackbar
+        <Snackbar
         sx={styles.snack}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={open}
@@ -151,57 +150,47 @@ const navigate = useNavigate();
             {errors.author.message}
           </Typography>
         )}
-        <Controller
-          name="review"
-          control={control}
-          rules={{
-            required: "Review cannot be empty.",
-            minLength: { value: 10, message: "Review is too short" },
-          }}
-          defaultValue=""
-          render={({ field: { onChange, value } }) => (
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="review"
-              value={value}
-              onChange={onChange}
-              label="Review text"
-              id="review"
-              multiline
-              minRows={10}
-            />
-          )}
-        />
-        {errors.review && (
-          <Typography variant="h6" component="p">
-            {errors.review.message}
-          </Typography>
-        )}
 
         <Controller
-          control={control}
-          name="rating"
-          render={({ field: { onChange, value } }) => (
+        name="review"
+        control={control}
+         rules={{
+           required: "Review cannot be empty",
+           minLength: { value: 10, message: "Review is too short" },}}
+        defaultValue=""
+        render={({ field: { onChange, value } }) => (
             <TextField
+             variant="outlined"
+             margin="normal"
+             required
+             fullWidth
+             name="review"
+             value={value}
+             onChange={onChange}
+             label="Review text"
+             id="review"
+             multiline
+             minRows={10}  />
+             )}/>
+
+
+        <Controller
+         control={control}
+         name="rating"
+         render={() => (
+              <TextField
               id="select-rating"
               select
               variant="outlined"
               label="Rating Select"
               value={rating}
               onChange={handleRatingChange}
-              helperText="Don't forget your rating"
-            >
-              {ratings.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          )}
-        />
+             helperText="Don't forget your rating">
+          {ratings.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+        {option.label}
+        </MenuItem> ))}
+    </TextField> )} />
 
         <Box sx={styles.buttons}>
           <Button

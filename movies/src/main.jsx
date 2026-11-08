@@ -29,7 +29,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
+export const App = () => {
   const [mode, setMode] = useState("dark");
 
   const toggleColorMode = () => {
