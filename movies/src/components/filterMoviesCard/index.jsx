@@ -54,6 +54,10 @@ export default function FilterMoviesCard(props) {
   handleChange(e, "year", e.target.value);
   };
 
+  const handleSortChange = (e) => {
+  handleChange(e, "sort", e.target.value);
+};
+
   return (
   <Card
     elevation={0}
@@ -71,7 +75,7 @@ export default function FilterMoviesCard(props) {
         display: "grid",
         gridTemplateColumns: {
         xs: "1fr",
-        md: "1.1fr 2fr 1fr 1fr 1fr",
+        md: "1.1fr 2fr 1fr 1fr 1fr 1fr",
        },
         gap: 2,
         alignItems: "center",
@@ -103,7 +107,7 @@ export default function FilterMoviesCard(props) {
           variant="body2"
           color="text.secondary"
         >
-          Search by title, genre or rating
+          Search, filter and sort movies
         </Typography>
       </Box>
 
@@ -188,6 +192,25 @@ export default function FilterMoviesCard(props) {
   </Select>
   </FormControl>
 
+  <FormControl fullWidth>
+  <InputLabel id="sort-label">Sort By</InputLabel>
+  <Select
+    labelId="sort-label"
+    id="sort-select"
+    value={props.sortOption}
+    label="Sort By"
+    onChange={handleSortChange}
+    sx={{
+      backgroundColor: "rgba(255,255,255,0.03)",
+    }}
+  >
+    <MenuItem value="default">Default</MenuItem>
+    <MenuItem value="rating">Highest Rated</MenuItem>
+    <MenuItem value="newest">Newest</MenuItem>
+    <MenuItem value="oldest">Oldest</MenuItem>
+    <MenuItem value="az">A-Z</MenuItem>
+  </Select>
+</FormControl>
 
     </CardContent>
   </Card>

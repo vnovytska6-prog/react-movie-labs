@@ -10,6 +10,7 @@ function MovieListPageTemplate({ movies, title, subtitle, action }) {
   const [genreFilter, setGenreFilter] = useState("0");
   const [ratingFilter, setRatingFilter] = useState("0");
   const [yearFilter, setYearFilter] = useState("0");
+  const [sortOption, setSortOption] = useState("default");
   const genreId = Number(genreFilter);
 
   let displayedMovies = movies
@@ -32,11 +33,32 @@ function MovieListPageTemplate({ movies, title, subtitle, action }) {
   return movieYear === Number(yearFilter);
 });
 
+  if (sortOption === "rating") {
+  displayedMovies = [...displayedMovies].sort(
+    (a, b) => b.vote_average - a.vote_average
+  );}
+
+  if (sortOption === "newest") {
+  displayedMovies = [...displayedMovies].sort(
+    (a, b) => new Date(b.release_date) - new Date(a.release_date)
+  ); }
+
+  if (sortOption === "oldest") {
+  displayedMovies = [...displayedMovies].sort(
+    (a, b) => new Date(a.release_date) - new Date(b.release_date)
+  ); }
+
+  if (sortOption === "az") {
+  displayedMovies = [...displayedMovies].sort((a, b) =>
+    a.title.localeCompare(b.title)
+  ); }
+
   const handleChange = (type, value) => {
    if (type === "name") { setNameFilter(value);} 
   else if (type === "genre") { setGenreFilter(value);} 
   else if (type === "rating") { setRatingFilter(value);}
   else if (type === "year") {setYearFilter(value);}
+  else if (type === "sort") { setSortOption(value); }
 };
 
   return (
@@ -58,10 +80,7 @@ function MovieListPageTemplate({ movies, title, subtitle, action }) {
     <Typography
       variant="body1"
       color="text.secondary"
-      sx={{
-        textAlign: "center",
-        mb: 2,
-      }}
+      sx={{ textAlign: "center", mb: 2, }}
     >
       {subtitle}
     </Typography>
@@ -70,10 +89,7 @@ function MovieListPageTemplate({ movies, title, subtitle, action }) {
 
     <Grid
       size={12}
-      sx={{
-        mb: 2,
-        px: 2,
-      }}
+      sx={{ mb: 2, px: 2, }}
     >
       <FilterCard
         onUserInput={handleChange}
@@ -81,6 +97,7 @@ function MovieListPageTemplate({ movies, title, subtitle, action }) {
         genreFilter={genreFilter}
         ratingFilter={ratingFilter}
         yearFilter={yearFilter}
+        sortOption={sortOption}
       />
     </Grid>
 
