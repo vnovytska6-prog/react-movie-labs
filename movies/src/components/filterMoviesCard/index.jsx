@@ -46,6 +46,10 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
+  const handleRatingChange = (e) => {
+  handleChange(e, "rating", e.target.value);
+};
+
   return (
   <Card
     elevation={0}
@@ -61,10 +65,10 @@ export default function FilterMoviesCard(props) {
       sx={{
         p: 2.5,
         display: "grid",
-        gridTemplateColumns: {
-          xs: "1fr",
-          md: "1.1fr 2fr 1fr",
-        },
+       gridTemplateColumns: {
+        xs: "1fr",
+        md: "1.1fr 2fr 1fr 1fr",
+       },
         gap: 2,
         alignItems: "center",
       }}
@@ -95,7 +99,7 @@ export default function FilterMoviesCard(props) {
           variant="body2"
           color="text.secondary"
         >
-          Search by title or genre.
+          Search by title, genre or rating
         </Typography>
       </Box>
 
@@ -143,6 +147,24 @@ export default function FilterMoviesCard(props) {
           ))}
         </Select>
       </FormControl>
+
+      <FormControl fullWidth>
+      <InputLabel id="rating-label">Minimum Rating</InputLabel>
+       <Select
+       labelId="rating-label"
+       id="rating-select"
+       value={props.ratingFilter}
+       label="Minimum Rating"
+       onChange={handleRatingChange}
+       sx={{ backgroundColor: "rgba(255,255,255,0.03)",}}>
+      <MenuItem value="0">All ratings</MenuItem>
+      <MenuItem value="6">6+</MenuItem>
+      <MenuItem value="7">7+</MenuItem>
+      <MenuItem value="8">8+</MenuItem>
+      <MenuItem value="9">9+</MenuItem>
+      </Select>
+     </FormControl>
+
     </CardContent>
   </Card>
 );
