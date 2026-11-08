@@ -47,27 +47,35 @@ export default function FilterMoviesCard(props) {
   };
 
   return (
-    <Card
-      elevation={0}
+  <Card
+    elevation={0}
+    sx={{
+      backgroundColor: "background.paper",
+      borderRadius: 3,
+      border: "1px solid",
+      borderColor: "rgba(157, 78, 221, 0.25)",
+      overflow: "hidden",
+    }}
+  >
+    <CardContent
       sx={{
-        backgroundColor: "background.paper",
-        borderRadius: 3,
-        border: "1px solid",
-        borderColor: "rgba(157, 78, 221, 0.25)",
-        overflow: "hidden",
+        p: 2.5,
+        display: "grid",
+        gridTemplateColumns: {
+          xs: "1fr",
+          md: "1.1fr 2fr 1fr",
+        },
+        gap: 2,
+        alignItems: "center",
       }}
     >
-      <CardContent
-        sx={{
-          p: 3,
-        }}
-      >
+      <Box>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             gap: 1,
-            mb: 1,
+            mb: 0.5,
           }}
         >
           <TuneIcon color="primary" />
@@ -86,59 +94,56 @@ export default function FilterMoviesCard(props) {
         <Typography
           variant="body2"
           color="text.secondary"
+        >
+          Search by title or genre.
+        </Typography>
+      </Box>
+
+      <TextField
+        fullWidth
+        id="movie-search"
+        label="Search movies"
+        type="search"
+        value={props.titleFilter}
+        onChange={handleTextChange}
+        InputProps={{
+          startAdornment: (
+            <SearchIcon
+              sx={{
+                mr: 1,
+                color: "text.secondary",
+              }}
+            />
+          ),
+        }}
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            backgroundColor: "rgba(255,255,255,0.03)",
+          },
+        }}
+      />
+
+      <FormControl fullWidth>
+        <InputLabel id="genre-label">Genre</InputLabel>
+
+        <Select
+          labelId="genre-label"
+          id="genre-select"
+          value={props.genreFilter}
+          label="Genre"
+          onChange={handleGenreChange}
           sx={{
-            mb: 3,
+            backgroundColor: "rgba(255,255,255,0.03)",
           }}
         >
-          Search the collection by title or genre.
-        </Typography>
-
-        <TextField
-          fullWidth
-          id="movie-search"
-          label="Search movies"
-          type="search"
-          value={props.titleFilter}
-          onChange={handleTextChange}
-          InputProps={{
-            startAdornment: (
-              <SearchIcon
-                sx={{
-                  mr: 1,
-                  color: "text.secondary",
-                }}
-              />
-            ),
-          }}
-          sx={{
-            mb: 2,
-            "& .MuiOutlinedInput-root": {
-              backgroundColor: "rgba(255,255,255,0.03)",
-            },
-          }}
-        />
-
-        <FormControl fullWidth>
-          <InputLabel id="genre-label">Genre</InputLabel>
-
-          <Select
-            labelId="genre-label"
-            id="genre-select"
-            value={props.genreFilter}
-            label="Genre"
-            onChange={handleGenreChange}
-            sx={{
-              backgroundColor: "rgba(255,255,255,0.03)",
-            }}
-          >
-            {genres.map((genre) => (
-              <MenuItem key={genre.id} value={genre.id}>
-                {genre.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </CardContent>
-    </Card>
-  );
+          {genres.map((genre) => (
+            <MenuItem key={genre.id} value={genre.id}>
+              {genre.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </CardContent>
+  </Card>
+);
 }

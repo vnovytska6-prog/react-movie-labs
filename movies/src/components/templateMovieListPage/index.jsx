@@ -23,25 +23,40 @@ function MovieListPageTemplate({ movies, title, action }) {
   };
 
   return (
-    <Grid container>
-      <Grid size={12}>
-        <Header title={title} />
-      </Grid>
-      <Grid container sx={{flex: "1 1 500px"}}>
-        <Grid 
-          key="find" 
-          size={{xs: 12, sm: 6, md: 4, lg: 3, xl: 2}} 
-          sx={{padding: "20px"}}
-        >
-          <FilterCard
-            onUserInput={handleChange}
-            titleFilter={nameFilter}
-            genreFilter={genreFilter}
-          />
-        </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
-      </Grid>
+  <Grid
+    container
+    sx={{
+      maxWidth: "1800px",
+      margin: "0 auto",
+      px: { xs: 2, md: 3 },
+      pb: 4,
+    }}
+  >
+    <Grid size={12}>
+      <Header title={title} />
     </Grid>
-  );
+
+    <Grid
+      size={12}
+      sx={{
+        mb: 2,
+        px: 2,
+      }}
+    >
+      <FilterCard
+        onUserInput={handleChange}
+        titleFilter={nameFilter}
+        genreFilter={genreFilter}
+      />
+    </Grid>
+
+    <Grid container size={12}>
+      <MovieList
+        action={action}
+        movies={displayedMovies}
+      />
+    </Grid>
+  </Grid>
+);
 }
 export default MovieListPageTemplate;
