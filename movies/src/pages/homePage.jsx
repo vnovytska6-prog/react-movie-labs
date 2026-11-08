@@ -29,6 +29,7 @@ const HomePage = () => {
     <>
       <PageTemplate
         title="Discover Movies"
+        subtitle="Explore something new tonight"
         movies={movies}
         action={(movie) => {
           return <AddToFavoritesIcon movie={movie} />;

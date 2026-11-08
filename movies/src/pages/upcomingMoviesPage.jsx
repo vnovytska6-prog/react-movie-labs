@@ -23,6 +23,7 @@ const UpcomingMoviesPage = () => {
   return (
     <PageTemplate
       title="Upcoming Movies"
+      subtitle="Movies coming soon to screens"
       movies={movies}
       action={(movie) => {
         return <AddToPlaylistIcon movie={movie} />;

@@ -3,8 +3,9 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({ movies, title, subtitle, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -35,6 +36,21 @@ function MovieListPageTemplate({ movies, title, action }) {
     <Grid size={12}>
       <Header title={title} />
     </Grid>
+
+    {subtitle && (
+  <Grid size={12}>
+    <Typography
+      variant="body1"
+      color="text.secondary"
+      sx={{
+        textAlign: "center",
+        mb: 2,
+      }}
+    >
+      {subtitle}
+    </Typography>
+  </Grid>
+)}
 
     <Grid
       size={12}
