@@ -111,13 +111,13 @@ const navigate = useNavigate();
         sx={styles.snack}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={open}
-        onClose={handleSnackClose}
-      >
+        onClose={handleSnackClose} >
         <MuiAlert
-          severity="success"
-          variant="filled"
-          onClose={handleSnackClose}
-        >
+        variant="filled"
+        onClose={handleSnackClose}
+        sx={{
+        backgroundColor: "primary.main",
+        color: "white", }} >
           <Typography variant="h4">
             Thank you for submitting a review
           </Typography>

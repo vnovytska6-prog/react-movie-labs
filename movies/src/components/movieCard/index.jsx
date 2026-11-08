@@ -34,7 +34,7 @@ const isFavorite = favorites.includes(movie.id);
       <CardHeader
         avatar={
           isFavorite ? (
-            <Avatar sx={{ backgroundColor: "red" }}>
+            <Avatar sx={{ backgroundColor: "primary.main" }}>
               <FavoriteIcon />
             </Avatar>
           ) : null
