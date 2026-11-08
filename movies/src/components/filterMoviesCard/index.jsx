@@ -48,7 +48,11 @@ export default function FilterMoviesCard(props) {
 
   const handleRatingChange = (e) => {
   handleChange(e, "rating", e.target.value);
-};
+  };
+
+  const handleYearChange = (e) => {
+  handleChange(e, "year", e.target.value);
+  };
 
   return (
   <Card
@@ -65,9 +69,9 @@ export default function FilterMoviesCard(props) {
       sx={{
         p: 2.5,
         display: "grid",
-       gridTemplateColumns: {
+        gridTemplateColumns: {
         xs: "1fr",
-        md: "1.1fr 2fr 1fr 1fr",
+        md: "1.1fr 2fr 1fr 1fr 1fr",
        },
         gap: 2,
         alignItems: "center",
@@ -164,6 +168,26 @@ export default function FilterMoviesCard(props) {
       <MenuItem value="9">9+</MenuItem>
       </Select>
      </FormControl>
+
+     <FormControl fullWidth>
+  <InputLabel id="year-label">Year</InputLabel>
+    <Select
+    labelId="year-label"
+    id="year-select"
+    value={props.yearFilter}
+    label="Year"
+    onChange={handleYearChange}
+    sx={{
+      backgroundColor: "rgba(255,255,255,0.03)",
+    }}
+  >
+    <MenuItem value="0">All years</MenuItem>
+    <MenuItem value="2026">2026</MenuItem>
+    <MenuItem value="2025">2025</MenuItem>
+    <MenuItem value="2024">2024</MenuItem>
+  </Select>
+  </FormControl>
+
 
     </CardContent>
   </Card>
