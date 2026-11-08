@@ -1,5 +1,6 @@
 import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from '../spinner'
