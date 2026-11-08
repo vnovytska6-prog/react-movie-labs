@@ -19,6 +19,9 @@ import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import NowPlayingMoviesPage from "./pages/nowPlayingMoviesPage";
 import PersonDetailsPage from "./pages/personDetailsPage";
 
+import Box from "@mui/material/Box";
+import AnimatedBackground from "./components/animatedBackground";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -69,6 +72,9 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+       <AnimatedBackground mode={mode} />
+
+       <Box sx={{ position: "relative", zIndex: 1, minHeight: "100vh", }} >
 
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
@@ -141,6 +147,7 @@ export const App = () => {
 
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
+      </Box>
     </ThemeProvider>
   );
 };
